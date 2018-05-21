@@ -19,6 +19,15 @@ go get -u github.com/shengdoushi/service-discovery
 示例:
 
 ```golang
+import (
+	"github.com/coreos/etcd/clientv3"
+	"fmt"
+	"time"
+	"log"
+	"github.com/shengdoushi/service-discovery"
+)
+
+func main(){
 	etcdClient, err := clientv3.New(clientv3.Config{
 		Endpoints: []string{"127.0.0.1:2379"},
 		DialTimeout: 5 * time.Second,
@@ -42,5 +51,6 @@ go get -u github.com/shengdoushi/service-discovery
 	}
 	
 	// 3. 移除服务
-	s.Stop()
+	defer s.Stop()
+}
 ```
