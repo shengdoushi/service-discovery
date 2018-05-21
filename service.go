@@ -62,6 +62,7 @@ func (service *Service)Start()(<- chan struct{}, error){
 		for {
 			select {
 			case <- service.stopCh:
+				service.etcdClient.Revoke(context.TODO(), grantId)
 				break LOOP
 			case <-keepAliveResp: // todo : if fail?
 				break
